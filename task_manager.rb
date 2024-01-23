@@ -1,5 +1,9 @@
 require_relative "task"
 
+
+puts "Welcome! I am your Task Manager. "
+
+
 class Task_Manager
   def initialize 
     @tasks = []
@@ -7,7 +11,7 @@ class Task_Manager
 
   def main
     loop do
-      puts "Welcome! I am your Task Manager. How can I help you? "
+      puts "How can I help you? "
       puts "1. Add a task"
       puts "2. List tasks"
       puts "3. Remove a task"
@@ -15,13 +19,18 @@ class Task_Manager
       print "What would you like to do? "
       choice = gets.chomp.to_i
 
+      puts " "
+
       case choice
       when 1 
         add_task
+        puts " "
       when 2
         list_tasks
+        puts " "
       when 3
         remove_task
+        puts " "
       when 4
         puts "Thank you for using your handy Task Manager. Remember to check your tasks! Goodbye!"
         break
@@ -51,11 +60,13 @@ class Task_Manager
     list_tasks
 
     print "Which task did you complete?"
-    completed = gets.chomp
+    completed = gets.chomp.to_i
 
-    removed_task = @tasks.delete_at(completed-1)
+    index = completed - 1
 
-    puts "Task completed"
+    removed_task = @tasks.delete_at(index)
+
+    puts "Task completed and removed from list."
 
   end
 end
