@@ -41,7 +41,14 @@ class Task_Manager
   end
 
   def list_tasks
+    puts "Your tasks to do: "
+    @tasks.each do |task|
+      puts task
+    end
   end
 
   def remove_task
+    print "Which task did you complete?"
+    completed = gets.chomp
+    
   end
