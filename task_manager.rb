@@ -42,13 +42,19 @@ class Task_Manager
 
   def list_tasks
     puts "Your tasks to do: "
-    @tasks.each do |task|
-      puts task
+    @tasks.each_with_index do |task, index|
+      puts "#{index + 1}. #{task}"
     end
   end
 
   def remove_task
+    list_tasks
+
     print "Which task did you complete?"
     completed = gets.chomp
-    
+
+    removed_task = @tasks.delete_at(completed-1)
+
+    puts "Task completed"
+
   end
