@@ -13,9 +13,9 @@ class Task_Manager
       puts "3. Remove a task"
       puts "4. Exit"
       print "What would you like to do? "
-      choice = @gets.chomp.to_i
+      choice = gets.chomp.to_i
 
-      case option
+      case choice
       when 1 
         add_task
       when 2
@@ -58,3 +58,4 @@ class Task_Manager
     puts "Task completed"
 
   end
+end
