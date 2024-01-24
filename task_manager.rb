@@ -50,23 +50,31 @@ class Task_Manager
   end
 
   def list_tasks
-    puts "Your tasks to do: "
-    @tasks.each_with_index do |task, index|
-      puts "#{index + 1}. #{task}"
+    if @tasks.empty?
+      puts "There are no tasks to do. "
+    else
+      puts "Your tasks to do: "
+      @tasks.each_with_index do |task, index|
+        puts "#{index + 1}. #{task}"
+      end
     end
   end
 
   def remove_task
-    list_tasks
+    if @tasks.empty?
+      puts "There are no tasks to remove."
+    else
+      list_tasks
 
-    print "Which task did you complete?"
-    completed = gets.chomp.to_i
+      print "Which task did you complete?"
+      completed = gets.chomp.to_i
 
-    index = completed - 1
+      index = completed - 1
 
-    removed_task = @tasks.delete_at(index)
+      removed_task = @tasks.delete_at(index)
 
-    puts "Task completed and removed from list."
+      puts "Task completed and removed from list."
+    end
 
   end
 end
