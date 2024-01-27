@@ -1,8 +1,3 @@
-# test_app.rb
-
-require 'minitest/autorun'
-require './app'
-
 require 'minitest/autorun'
 require './app'
 
@@ -11,24 +6,33 @@ class TestTaskManager < Minitest::Test
     @task_manager = Task_Manager.new
   end
 
-  def test_add_task
-    def test_add_task
-      output = capture_output { @task_manager.add_task }
-      assert_match "New task added to the list.", output
-      assert_equal 1, @task_manager.instance_variable_get(:@tasks).length
-      assert_equal "Homework", @task_manager.instance_variable_get(:@tasks).first.description
-      assert_equal "01/30", @task_manager.instance_variable_get(:@tasks).first.due_date
+  def test_task_manager
+    # Test add_task
+    input_tests("Homework", "01/30") do
+      capture_output { @task_manager.add_task }
     end
-    
+
+    assert_equal 1, @task_manager.tasks.length
+    assert_equal "Homework", @task_manager.tasks.first.description
+    assert_equal "01/30", @task_manager.tasks.first.due_date
+
+    # Test remove_task
+  input_tests("1") do
+      capture_output { @task_manager.remove_task }
+    end
+
+    assert_equal 0, @task_manager.tasks.length
   end
 
-  def test_remove_task
-    output = capture_output { @task_manager.remove_task }
-    assert_match(/Task completed and removed from list\.|There are no tasks to remove\./, output)
-    assert_equal 0, @task_manager.instance_variable_get(:@tasks).length
+
+  def input_tests(*inputs)
+    original_stdin = $stdin
+    $stdin = StringIO.new(inputs.join("\n"))
+    yield
+  ensure
+    $stdin = original_stdin
   end
 
-  # Add the capture_output method here
   def capture_output
     original_stdout = $stdout
     $stdout = StringIO.new
