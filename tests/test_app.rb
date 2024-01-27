@@ -20,7 +20,6 @@ class TestTaskManager < Minitest::Test
     input_tests("1") do
       capture_output { @task_manager.remove_task }
     end
-
     assert_equal 0, @task_manager.tasks.length
 
     # Test exit
