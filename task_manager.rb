@@ -78,4 +78,9 @@ class Task_Manager
     end
 
   end
+
+  def tasks
+    @tasks
+  end
+
 end
