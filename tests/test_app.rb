@@ -24,6 +24,12 @@ class TestTaskManager < Minitest::Test
     assert_equal 0, @task_manager.tasks.length
   end
 
+  # Test exit
+  simulate_user_input("4") do
+    output = capture_output { @task_manager.main }
+    assert_match /Thank you for using your handy Task Manager\. Remember to check your tasks! Goodbye!/, output
+  end
+
 
   def input_tests(*inputs)
     original_stdin = $stdin
