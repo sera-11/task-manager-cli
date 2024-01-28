@@ -12,6 +12,7 @@ class Task_Manager
 
   def main
     loop do
+      puts " "
       puts "How can I help you? "
       puts "1. Add a task"
       puts "2. List tasks"
@@ -24,16 +25,31 @@ class Task_Manager
 
       case choice
       when 1 
-        add_task
+        print "Enter your tasks description: "
+        description = gets.chomp
+        print "What is your task due? (MM/DD): "
+        due_date = gets.chomp
         puts " "
+        add_task(description,due_date)
       when 2
         list_tasks
         puts " "
       when 3
-        remove_task
+        puts " "
+        if @tasks.empty?
+          puts "There are no tasks to remove."
+        else
+          list_tasks
+    
+          print "Which task did you complete?"
+          completed = gets.chomp.to_i
+    
+          index = completed - 1
+          remove_task(index)
+        end
         puts " "
       when 4
-        puts "Thank you for using your handy Task Manager. Remember to check your tasks! Goodbye!"
+        exit_app
         break
       else
         puts "Invalid option. Try again"
@@ -41,13 +57,9 @@ class Task_Manager
     end
   end
 
-  def add_task
-    print "Enter your tasks description: "
-    description = gets.chomp
-    print "What is your task due? (MM/DD): "
-    due_date = gets.chomp
+  def add_task(description, due_date)
     @tasks << Task.new(description, due_date)
-    puts "New task added to the list."
+    return "New task added to the list."
   end
 
   def list_tasks
@@ -61,22 +73,15 @@ class Task_Manager
     end
   end
 
-  def remove_task
-    if @tasks.empty?
-      puts "There are no tasks to remove."
-    else
-      list_tasks
+  def remove_task(index)
+    removed_task = @tasks.delete_at(index)
 
-      print "Which task did you complete?"
-      completed = gets.chomp.to_i
+    return "Task completed and removed from list."
 
-      index = completed - 1
+  end
 
-      removed_task = @tasks.delete_at(index)
-
-      puts "Task completed and removed from list."
-    end
-
+  def exit_app
+    return "Thank you for using your handy Task Manager. Remember to check your tasks! Goodbye!"
   end
 
   def tasks
