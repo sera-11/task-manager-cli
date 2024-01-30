@@ -2,10 +2,7 @@
 require_relative "task"
 
 
-puts "Welcome! I am your Task Manager. "
-
-
-class Task_Manager
+class TaskManager
   def initialize 
     @tasks = []
   end

@@ -4,7 +4,7 @@ require './app'
 class TestTaskManager < Minitest::Test
 
   def test_task_manager
-    task_manager = Task_Manager.new
+    task_manager = TaskManager.new
     
     assert_match "New task added to the list.", task_manager.add_task("Homework", "01/30"), "Task method failed"
 
